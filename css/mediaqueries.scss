@@ -1,0 +1,402 @@
+
+    
+@import "variables";
+
+@import "mixins";
+
+// *********************************************
+
+$phone: '(min-width: 320px) and (max-width: 767px)';
+
+$tablet: '(min-width: 768px) and (max-width: 991px)';
+
+$laptop: '(min-width: 992px) and (max-width: 1200px)';
+
+$desktop: '(min-width: 1201px) and (max-width: 1900px)';
+
+@mixin respond-to($device){
+    @media only screen and #{$device}{
+        @content;
+    }
+}
+
+@include respond-to($phone){
+    // Common Style
+    body{
+        overflow-x: hidden;
+    }
+    .content-wrapper{
+        width: 95%;
+    }
+    
+    // Layout Style
+    .header{
+        .header-top{
+            .sidenav-toggle{
+                display: block;
+            }
+            .search-icon{
+               @include justify-content(center);
+            }
+            .logo{
+                width: 140px;
+            }
+            .searchbox-holder{
+                .searchbox{
+                    width: 100%;
+
+                    .search-close {
+                        width: 100%;
+                        margin-top: 15px;
+                        margin-bottom: 15px;
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+    .footer{
+        .footer-content{
+            div{
+                margin-bottom: 10px;
+            }
+        }
+    }
+    .copyright{
+        .content-wrapper{
+            .row{
+                display: block;
+            }
+        }
+        p{
+            margin-top: 10px;
+            text-align: center;
+        }
+    }
+    
+    // Index Page
+    .main-content{
+        .custom-image-text{
+            .content-wrapper{
+                width: 90%;
+                .row{
+                    display: block;
+                }
+            }
+            .custom-text{
+                margin-top: 15px;
+                padding: 0;
+            }
+        }
+        .home-services{
+            .service-box{
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    // Collection Page
+    .collection{
+        .collection-header{
+            .filter-sort-view-option{
+                .sort-option{
+                    flex: none;
+                }
+            }
+        }
+    }
+    
+    // Product Page
+    .product-details-page{
+        .product-details{
+            .content-wrapper{
+                width: 95%;
+            }
+            .product-description{
+                .quantity-row{
+                    .quantity-box{
+                        .quantity-input{
+                            flex: 0.2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Cart Page
+    .cart-page{
+        .cart-page-content{
+            .cart-item-content{
+                .cart-item{
+                    .item-image-name{
+                        .item-image {
+                            width: 285px;
+                            padding-right: 15px;
+                        }
+                        .item-name {
+                            padding-right: 15px;
+                        }
+                    }
+                    .item-price{
+                        margin: 15px 0;
+                    }
+                    .xs-flex{
+                        @include flexbox;
+                        @include align-items(center);
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+    // CSS For Forgot Password Page
+    .customer-password{
+        width: 95%;
+        
+        h2{
+            font-size: 24px;
+        }
+        
+        .actions{
+            input{
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+@include respond-to($tablet){
+    // Common Style
+    body{
+        overflow-x: hidden;
+    }
+    
+    // Layout Style
+    .header{
+        .header-top{
+            .searchbox-holder{
+                .searchbox{
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .footer{
+        .footer-content{
+            div{
+                margin-bottom: 10px;
+            }
+        }
+    }
+    .copyright{
+        display: block;
+        p{
+            margin-top: 10px;
+            text-align: center;
+        }
+    }
+
+    // Index Page
+    .main-content{
+        .custom-image-text{
+            .content-wrapper{
+                width: 90%;
+                .row{
+                    display: block;
+                }
+            }
+            .custom-text{
+                margin-top: 15px;
+                padding: 0;
+            }
+        }
+    }
+
+    // Catalog Page
+    .collection{
+        .mobile-filter{
+            position: unset;
+        }
+        .catalog-filter{
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            z-index: 100;
+            
+            .filters-accordion{
+                width: 80%;
+                max-height: 100%;
+                overflow-y: auto;
+                background: $wcolor;
+                margin: 15px auto;
+                padding: 5px 20px 20px;
+                
+                .filter-header{
+                    position: sticky;
+                    top: -5px;
+                    background: $wcolor;
+                    border-bottom: 1px solid #ddd;
+                    margin: 0 -20px;
+                    padding: 0 15px;
+                    z-index: 50;
+                    .row{
+                        @include flexbox;
+                        @include align-items(center);
+                    }
+                }
+                
+                .catalog-options{
+                    margin-bottom: 10px;
+                    .selected-filters{
+                        @include flexbox;
+                        @include align-items(center);
+                        @include flex-wrap(wrap);
+                        .remove-filter{
+                            background: $bcolor;
+                            margin: 5px 5px 5px 0px;
+                            padding: 5px;
+                            
+                            a{
+                                color: $wcolor;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .catalog-sort{
+            .sort-option{
+                select{
+                    width: 100%;
+                    height: 40px;
+                }
+            }
+        }
+    }
+    
+    // Product Details Page
+    .product-details-page{
+        .product-details{
+            .content-wrapper {
+                width: 90%;
+            }
+            .product-description{
+                .quantity-row{
+                    .quantity-box{
+                        .quantity-input{
+                            flex: 0.2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Cart Page
+    .cart-page{
+        .cart-page-content{
+            .cart-item-content{
+                .cart-item{
+                    .item-image-name{
+                        .item-image {
+                            width: 285px;
+                            padding-right: 20px;
+                        }
+                        .item-name {
+                            padding-right: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // CSS For Login/Signup Page
+    
+    // CSS For Forgot Password Page
+    .customer-password{
+        width: 50%;
+        max-width: 100%;
+    }
+}
+
+@include respond-to($laptop){
+    // Common Style
+    
+    // Layout Page
+    .header{
+        .header-content{
+            .menu{
+                .menu-items{
+                    li{
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+    }
+    
+    // Product Details Page
+    .product-details-page{
+        .product-details{
+            .content-wrapper {
+                width: 90%;
+            }
+            .product-description{
+                .quantity-row{
+                    .quantity-box{
+                        .quantity-input{
+                            flex: 0.1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Cart Page
+    
+    
+    // CSS For Login/Signup Page
+    .signup-login-container{
+        width: 35%;
+    }
+    
+    // CSS For Forgot Password Page
+    .customer-password{
+        width: 35%;
+    }
+}
+
+@include respond-to($desktop){
+    // Common Style
+    .content-wrapper{
+        width: 90%;
+    }
+    
+    
+    // Product Page
+    .product-details-page{
+        .product-details{
+            .product-description{
+                .quantity-row{
+                    .quantity-box{
+                        .quantity-input{
+                            flex: 0.08;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

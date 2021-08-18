@@ -1,0 +1,859 @@
+
+// Some Margins Class
+
+
+@import "mixins";
+@import "variables";
+@import "common";
+
+
+
+body{
+    font-family: $theme-font;
+    overflow-x: hidden;
+}
+
+// CSS For Layout
+
+.header{
+    width: 100%;
+    background: $wcolor;
+    z-index: 50;
+
+    .header-top{
+        background: $theme-color;
+        padding: 20px 0;
+
+        .sidenav-toggle{
+            display: none;
+            span{
+                display: block;
+                width: 22px;
+                height: 2px;
+                background:#f1e8e8;
+                margin-bottom: 5px;
+            }
+        }
+        .search-icon{
+            flex: 0.5;
+            color: #f1e8e8;
+            cursor: pointer;
+            svg{
+                fill: #f1e8e8;
+            }
+        }      
+        .logo{
+            img{
+                margin: 0 auto;
+            }
+        }
+        .header-icon{
+            position: relative;
+            flex: 0.5;
+            @include justify-content(flex-end);
+            @include transition(all,0.3s,ease);
+
+            div{
+                position: relative;
+                margin-left: 25px;
+            }
+
+            a{
+                color: #f1e8e8;
+                font-weight: 600;
+                text-transform: capitalize;
+
+                span{
+                    color: $gcolor;
+                    font-weight: 500;
+                }
+            }
+
+            svg{
+                fill: #f1e8e8;
+            }
+
+            .cart-icon{
+                .cart-count{
+                    position: absolute;
+                    top: -5px;
+                    right: -10px;
+                    width: 20px;
+                    height: 20px;
+                    background: #f1e8e8;
+                    border-radius: 50%;
+                    font-size: 12px;
+                    font-weight: 600;
+                    text-align: center;
+                }
+            }
+        }
+        .searchbox-holder{
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: $wcolor;
+            visibility: hidden;
+            @include opacity (0);
+            z-index: 200;
+            @include transition(all,0.5s,ease);
+
+            .searchbox{
+                width: 50%;
+                margin: 0 auto;
+                margin-top: 3%;
+                .form-control{
+                    height: 50px;
+                    background: #ddd;
+                    border: 1px solid #ddd;
+                    @include box-shadow(none);
+
+                    @include placeholder{
+                        color: $bcolor;
+                        font-size: 15px;
+                        font-weight: 500;
+                    }
+                }
+
+                button{
+                    height: 50px;
+                    background: #ddd;
+                    border: 1px solid #ddd;
+                    @include box-shadow(none);
+                    
+                    svg{
+                        fill: $bcolor;
+                    }
+                }
+
+                .search-close{
+                    width: 20px;
+                    cursor: pointer;
+                    margin: 0 auto;
+                    margin-top: 10px;
+                    text-align: center;
+                }
+            }
+        }
+        .show-searchbox-holder{
+            visibility: visible;
+            @include opacity(1);
+            @include transition(all,0.5s,ease);
+        }
+    }
+    .header-bottom{
+        border-bottom: 1px solid #ddd;
+        padding: 18px 0;
+        .menu{
+            .menu-items{
+                position: relative;
+                @include flexbox;
+                @include align-items(center);
+                @include justify-content(center);
+                margin: 0;
+
+                li{
+                    display: inline-block;
+                    margin: 0 20px;
+
+                    a{
+                        color: $bcolor;
+                        font-size: 15px;
+                        font-weight: 500;
+                        text-transform: uppercase;
+                        // @include transition(all,0.5s,ease);
+
+                        &:hover{
+                            color: $theme-color;
+                        }
+                    }
+                }
+
+                .has-dropdown{
+                    .dropdown-content{
+                        position: absolute;
+                        top: 40px;
+                        left: 0;
+                        width: 100%;
+                        background: $wcolor;
+                        border-bottom: 1px solid #ddd;
+                        @include flexbox;
+                        @include justify-content(center);
+                        visibility: hidden;
+                        @include opacity (0);
+                        padding: 15px 0;
+                        text-align: center;
+                        z-index: 100;
+                        @include transition(all,0.5s,ease);
+                    }
+
+                    .child-content{
+                        .grand-child-content{
+                            li{
+                                display: block;
+                                margin: 5px 10px;
+
+                                a{
+                                    font-size: 13px;
+                                    &:hover{
+                                        color: $theme-color;
+                                    }
+                                }
+                            }                         
+                        }
+                    }
+
+                    &:hover{
+                        .dropdown-content{
+                            visibility: visible;
+                            @include opacity(1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer{
+    border-top: 1px solid rgba(206,206,206,0.2);
+    border-bottom: 1px solid rgba(206,206,206,0.2);
+    .footer-content{
+        background: #f4f6f8;
+        padding: 50px 0;
+        .content-wrapper{
+            width: 95%;
+        }
+        .footer-header{
+            color: $theme-color;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+        p{
+            max-width: 450px;
+            color: $gcolor;
+            font-size: 15px;
+            line-height: 25px;
+        }
+        .footer-link{
+            overflow: hidden;
+            li{
+                margin-bottom: 10px;
+                a{
+                    color: $gcolor;
+                    display: inline-block;
+                    text-transform: capitalize;
+                    @include transition(all,0.5s,ease);
+                }
+
+                &:hover{
+                    a{
+                        color: $theme-color;
+                    }
+                }
+            }
+        }
+        .social-link{
+            @include flexbox;
+            @include align-items(center);
+            margin-top: 15px;
+            svg{
+                fill: $gcolor;
+                margin-right: 10px;
+            }
+        }
+        .newsletter-form{
+            .form-control{
+                height: 42px;
+                border: 1px solid #ddd;
+                @include border-radius(0);
+                @include box-shadow(none);
+                margin: 20px 0;
+    
+                @include placeholder{
+                    font-size: 15px;
+                    font-weight: 500;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}
+
+.copyright{
+    background: #f4f6f8;
+    border-top: 1px solid #ddd;
+    padding: 25px 0;
+
+    .content-wrapper{
+        width: 95%;
+        .row{
+            @include flexbox;
+            @include align-items(center);
+        }
+    }
+
+    p{
+        color: $gcolor;
+        margin-bottom: 0;
+
+        a{
+            color: $gcolor;
+
+            &:hover{
+                color: $theme-color;
+            }
+        }
+    }
+}
+
+// **********************************
+
+// CSS For Index Page
+
+.main-content{
+    .gallery-collection{
+        .gallery-row{
+            @include flexbox;
+            .gallery-item{
+                position: relative;
+                margin-bottom: 25px;
+
+                .gallery-item-text {
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.25);
+                    @include flexbox;
+                    flex-flow: column;
+                    @include align-items(center);
+                    @include justify-content(center);
+
+                    .gallery-item-text-title{
+                        color: $wcolor;
+                        display: block;
+                        font-size: 23px;
+                        font-weight: 500;
+                        margin-bottom: 10px;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+            
+            .gallery-item-2{
+                margin-left: 25px;
+            }
+
+            .gallery-item-4{
+                @extend .gallery-item-2;
+            }
+        }
+    }
+    .gallery-collection-mobile{
+        .gallery-item{
+            position: relative;
+            margin-bottom: 25px;
+
+            .gallery-item-text {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.25);
+                @include flexbox;
+                flex-flow: column;
+                @include align-items(center);
+                @include justify-content(center);
+
+                .gallery-item-text-title{
+                    color: $wcolor;
+                    display: block;
+                    font-size: 23px;
+                    font-weight: 500;
+                    margin-bottom: 10px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+    .home-collection-slider{
+        .home-collection-slider-header{
+            h3{
+                @include flexbox;
+                @include align-items(center);
+                @include justify-content(center);
+                text-transform: uppercase;
+
+                span{
+                    cursor: pointer;
+
+                    svg{
+                        @include transition(all,0.5s,ease);
+                        &:hover{
+                            fill: $link-color;
+                        }
+                    }
+                }
+
+                a{
+                    color: $bcolor;
+                    padding: 0 25px;
+                    @include transition(all,0.5s,ease);
+                    &:hover{
+                        color: $link-color;
+                    }
+                }
+            }
+        }
+        .home-collection-slider-content{
+            .collection-slider{
+                .slick-slide{
+                    margin: 15px;
+                }
+                .slick-prev{
+                    left: -10px;
+                    z-index: 10;
+                }
+                .slick-next{
+                    right: -10px;
+                    z-index: 10;
+                }
+                .slick-prev:before, 
+                .slick-next:before{
+                    color: $bcolor;
+                }
+            }
+        }
+    }
+    .custom-image-text{
+        .content-wrapper{
+            width: 80%;
+            .row{
+                @include flexbox;
+                @include align-items(center);
+            }
+        }
+        .custom-text{
+            padding: 0 10%;
+            h2{
+                margin-top: 0;
+                text-transform: uppercase;
+            }
+            p{
+                max-width: 650px;
+                margin-bottom: 20px;
+                font-size: 16px;
+                line-height: 25px;
+                text-align: justify;
+            }
+        }
+    }
+    .home-services{
+        background: #2f2e2e;
+        .content-wrapper{
+            width: 80%;
+            padding: 20px 15px;
+        }
+        .service-box{
+            text-align: center;
+            .icon{
+                svg{
+                    fill: #f4f6f8;
+                }                
+            }
+            .text{
+                h4{
+                    color: #f4f6f8;
+                    margin-top: 10px;
+                    margin-bottom: 0;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}
+
+// CSS For Collection Page
+
+.collection{
+    .collection-name{
+        h2{
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+    .collection-header{
+        .filter-sort-view-option{
+            @include flexbox;
+            @include align-items(center);
+            @include justify-content(space-between);
+
+            .filter-option{
+                cursor: pointer;
+            }
+            .sort-option{
+                @include flexbox;
+                @include align-items(center);
+                @include justify-content(space-between);
+                flex: 0.2;
+
+                select{
+                    flex: 1;
+                    height: 45px;
+                    @include border-radius(0);
+                    @include box-shadow(none);
+                    cursor: pointer;
+                    margin-left: 15px;
+                }
+            }
+            .view-option{
+                ul{
+                    @include flexbox;
+                    @include align-items(center);
+                    li{
+                        a{
+                            background-color: transparent;
+                            color: $bcolor;
+                            @include flexbox;
+                            @include align-items(center);
+                            @include transition(all,0.5s,ease);
+
+                            span{
+                                margin-left: 15px;
+                                text-transform: capitalize;
+                            }
+
+                            &:hover,
+                            &:focus{
+                                background-color: transparent;
+                                color: $link-color;
+
+                                svg{
+                                    fill: $link-color
+                                }
+                            }
+                        }
+                    }
+                    .active{
+                        a{
+                            background-color: transparent;
+                            color: $link-color;
+                            @include transition(all,0.5s,ease);
+
+                            svg{
+                                fill: $link-color
+                            }
+
+                            &:hover,
+                            &:focus{
+                                background-color: transparent;
+                                color: $link-color;
+
+                                svg{
+                                    fill: $link-color
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .collection-content{
+        padding: 30px 0;
+    }
+    .collection-filter{
+        .filters{
+            position: fixed;
+            top: 0;
+            left: -100%;
+            height: 100%;
+            width: 350px;
+            background: $wcolor;
+            padding: 20px;
+            z-index: 100;
+            @include transition(all,0.8s,ease);
+
+            .filters-header{
+                padding-bottom: 15px;
+                text-align: right;
+
+                .filter-close{
+                    cursor: pointer;
+                }
+            }
+        }
+        .filters-overlay{
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+            visibility: hidden;
+            @include opacity (0);
+            z-index: 50;
+            @include transition(all,0.5s,ease);
+        }
+    }
+    .show-collection-filter{
+        .filters{
+            left: 0;
+            @include transition(all,0.8s,ease);
+        }
+        .filters-overlay{
+            visibility: visible;
+            @include opacity(1);
+            @include transition(all,0.5s,ease);
+        }
+    }
+}
+
+// CSS For Product Details Page
+
+.product-details-page{
+    padding: 50px 0;
+    .product-details{
+        .content-wrapper{
+            width: 75%;
+        }
+        .product-description{
+            .name{
+                h2{
+                    line-height: 40px;
+                    margin-top: 0;
+                    text-transform: uppercase;
+                }
+            }
+            .price{
+                border-bottom: 1px solid #ddd;
+                font-size: 23px;
+                font-weight: 500;
+                padding-bottom: 30px;
+
+                s{
+                    margin-left: 10px;
+                }
+            }
+            .wishlist-button{
+                margin-top: 15px;
+                a{
+                    color: $bcolor;
+                    text-transform: capitalize;
+                    @include transition(all, 0.5s, ease);
+
+                    &:hover,
+                    &:focus{
+                        color: $link-color;
+                        @include transition(all, 0.5s, ease);
+                    }
+                }
+            }
+            .quantity-row{
+                margin: 20px 0;
+                label{
+                    font-weight: 400;
+                    letter-spacing: 2px;
+                    margin-bottom: 10px;
+                    text-transform: capitalize;
+                }
+                .quantity-box{
+                    @include flexbox;
+
+                    button{
+                        height: 48px;
+                        width: 48px;
+                        background: $wcolor;
+                        border: 1px solid #ccc;
+                        @include border-radius(0);
+                    }
+                    .quantity-input{
+                        flex: 0.05;
+                        height: 48px;
+                        @include border-radius(0);
+                        @include box-shadow(none);
+                        margin: 0 10px;
+                        text-align: center;
+                    }
+                }
+            }
+            .cart-buttons{
+                button{
+                    margin: 10px 0;
+                    padding: 13px 0;
+                    word-spacing: 5px;
+                }
+            }
+            .shipping-info{
+                border-bottom: 1px solid #ddd;
+                padding-top: 20px;
+                padding-bottom: 30px;
+                p{
+                    max-width: 250px;
+                }
+            }
+            .share-buttons{
+                margin: 25px 0;
+            }
+        }
+    }
+    .related-products{
+        padding: 50px 0;
+
+        .related-products-header{
+            h3{
+                text-align: center;
+                text-transform: uppercase;
+            }
+        }
+        .related-products-content{
+            .related-product-slider{
+                .slick-slide{
+                    margin: 15px;
+                }
+                .slick-prev{
+                    left: -10px;
+                    z-index: 10;
+                }
+                .slick-next{
+                    right: -10px;
+                    z-index: 10;
+                }
+                .slick-prev:before, 
+                .slick-next:before{
+                    color: $bcolor;
+                }
+            }
+        }
+    }
+}
+
+//CSS For Cart Page
+
+.cart-page{
+    padding: 50px 0;
+    .cart-page-header{
+        margin-bottom: 30px;
+        h2{
+            margin-top: 0;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+    .cart-page-content{
+        .cart-item-header{
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            .cart-item-header-title{
+                font-size: 15px;
+                text-transform: capitalize;
+            }
+        }
+        .cart-item-content{
+            .cart-item{
+                border-bottom: 1px solid #ddd;
+                padding: 20px 0;
+
+                .item-image-name{
+                    @include flexbox;
+
+                    .item-image{
+                        width: 150px;
+                        padding-right: 30px;
+                    }
+                    .item-name{
+                        padding-right: 30px;
+
+                        a{
+                            color: $link-color;
+                        }
+                    }
+                }
+                .item-quantity{
+                    .quantity-box{
+                        width: 115px;
+                        @include flexbox;
+    
+                        button{
+                            height: 42px;
+                            width: 42px;
+                            background: $wcolor;
+                            border: 1px solid #ccc;
+                            @include border-radius(0);
+                            padding: 0 8px;
+
+                            svg{
+                                fill: $theme-color;
+                            }
+                        }
+                        .minus{
+                            border-right: 0;
+                        }
+                        .plus{
+                            border-left: 0;
+                        }
+                        .cart-quantity-input{
+                            height: 42px;
+                            border-left: 0;
+                            border-right: 0;
+                            @include border-radius(0);
+                            @include box-shadow(none);
+                            text-align: center;
+                        }
+                    }
+                }
+                .item-remove-button{
+                    margin: 10px 0;
+                    a{
+                        width: 115px;
+                        color: $theme-color;
+                        @include flexbox;
+                        @include align-items(center);
+                        @include justify-content(center);
+                        text-transform: capitalize;
+
+                        svg{
+                            fill: $theme-color;
+                            margin-left: 5px;
+                        }
+                    }
+                }
+            }
+        }
+        .cart-item-footer{
+            float: right;
+
+            .subtotal{
+                margin-bottom: 20px;
+                h2{
+                    text-align: right;
+                    text-transform: uppercase;
+                }
+            }
+            .cart-buttons{
+                text-align: right;
+                a{
+                    display: block;
+                    margin: 15px 0;
+                }
+                a:not(.tbtn){
+                    color: $theme-color;
+                    text-transform: capitalize;
+                    @include transition(all, 0.5s, ease);
+
+                    &:hover,&:focus{
+                        color: $link-color;
+                        @include transition(all, 0.5s, ease);
+                    }
+                }
+            }
+        }
+    }
+}
